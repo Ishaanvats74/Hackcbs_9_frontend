@@ -2,7 +2,7 @@ import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
 export const backend = (
-  process.env.BACKEND_URL ?? "http://127.0.0.1:8000"
+  process.env.BACKEND_URL ?? "https://hackcbs-backend-9inr.onrender.com"
 ).replace(/\/$/, "");
 type Tokens = {
   access_token: string;

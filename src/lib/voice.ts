@@ -53,10 +53,11 @@ export class VoiceConversation {
         );
       const { token, websocket_url } = await result.json();
       if (this.stopped) return;
-      const base =
-        process.env.NEXT_PUBLIC_WS_URL ??
-        websocket_url ??
-        `${location.protocol === "https:" ? "wss:" : "ws:"}//${location.hostname}:8000`;
+      const base = (
+        process.env.NEXT_PUBLIC_WS_URL?.trim() ||
+        websocket_url ||
+        `${location.protocol === "https:" ? "wss:" : "ws:"}//${location.hostname}:8000`
+      ).replace(/\/$/, "");
       this.socket = new WebSocket(
         `${base}/ws/sessions/${this.sessionId}/audio`,
       );

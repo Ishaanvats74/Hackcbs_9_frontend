@@ -173,3 +173,20 @@ test("microphone denial returns an actionable error and releases voice state", a
     fixture.restore();
   }
 });
+
+test("empty Docker WebSocket override uses the backend-provided URL", async () => {
+  const original = process.env.NEXT_PUBLIC_WS_URL;
+  process.env.NEXT_PUBLIC_WS_URL = "";
+  const fixture = setup();
+  try {
+    await fixture.voice.start();
+    assert.equal(
+      fixture.sockets[0].url,
+      "ws://127.0.0.1:9876/ws/sessions/synthetic-session/audio",
+    );
+  } finally {
+    fixture.restore();
+    if (original === undefined) delete process.env.NEXT_PUBLIC_WS_URL;
+    else process.env.NEXT_PUBLIC_WS_URL = original;
+  }
+});

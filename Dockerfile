@@ -7,7 +7,7 @@ FROM node:24-alpine AS builder
 WORKDIR /app
 COPY --from=dependencies /app/node_modules ./node_modules
 COPY . .
-ARG NEXT_PUBLIC_WS_URL=ws://127.0.0.1:8000
+ARG NEXT_PUBLIC_WS_URL=
 ENV NEXT_PUBLIC_WS_URL=$NEXT_PUBLIC_WS_URL NEXT_TELEMETRY_DISABLED=1
 RUN npm run build
 
