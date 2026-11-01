@@ -1,0 +1,8 @@
+
+.next-audit/
+.next
+.next-video/
+node_modules
+.next-audit
+.next-video
+.npm-cache
